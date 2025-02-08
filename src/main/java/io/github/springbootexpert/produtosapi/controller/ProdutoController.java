@@ -2,11 +2,9 @@ package io.github.springbootexpert.produtosapi.controller;
 
 import io.github.springbootexpert.produtosapi.model.Produto;
 import io.github.springbootexpert.produtosapi.repository.ProdutoRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -28,6 +26,14 @@ public class ProdutoController {
 
             produtoRepository.save(produto);
             return produto;
+    }
+
+    @GetMapping("{id}")
+    public Produto obterPorId(@PathVariable("id") String id){
+       // Optional<Produto> produto = produtoRepository.findById(id);
+        //return produto.isPresent() ? produto.get() : null;
+
+        return produtoRepository.findById(id).orElse(null);
     }
 
 }
